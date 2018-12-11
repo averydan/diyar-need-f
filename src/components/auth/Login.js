@@ -33,6 +33,7 @@ export default class Login extends Component {
                     this.setState({ showEntry: false })
                 } else {
                     response.json().then((data) => {
+                        this.props.setToken(data.sessionToken)
                         this.setState({ showEntry: true })
                         this.setState({ showError: false })
                         console.log(data);

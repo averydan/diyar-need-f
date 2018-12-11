@@ -3,8 +3,16 @@ import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import APIURL from "../../helpers/enviorment";
 
 export default class Signup extends Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+    super();
+        this.setToken = (token) => {
+            localStorage.setItem('token', token);
+            this.setState({ sessionToken: token });
+        }
+        this.state = {
+            sessionToken: '',
+            setToken: this.setToken
+        }
         this.state = {
             username: "",
             password: "",
@@ -35,6 +43,7 @@ export default class Signup extends Component {
                         this.setState({ showEntry: true })
                         this.setState({ showError: false })
                         console.log(data);
+                        this.setToken(data.sessionToken)
                     })
                 }
             })
@@ -63,3 +72,4 @@ export default class Signup extends Component {
         )
     }
 }
+

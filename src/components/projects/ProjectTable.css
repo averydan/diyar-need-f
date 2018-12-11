@@ -1,0 +1,10 @@
+.display {
+    background-color: rgba(151, 151, 151, 0.258);
+    border-radius: 25px;
+}
+
+#header {
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+}
