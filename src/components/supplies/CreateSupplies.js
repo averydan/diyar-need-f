@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import { Button, Form, FormGroup, Input, Modal, ModalBody, ModalHeader } from "reactstrap";
 import APIURL from "../../helpers/enviorment";
 
-export default class ProjectCreate extends Component {
+export default class SuppliesCreate extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            aid: "",
-            index: "",
-            title: "",
-            budget: ""
+            pid: 18,
+            brand: "",
+            item: "",
+            amount: ""
         }
     }
 
@@ -20,9 +20,9 @@ export default class ProjectCreate extends Component {
     }
 
     handleSubmit = (event) => {
-        fetch(`${APIURL}/projects/add`, {
+        fetch(`${APIURL}/supplies/new`, {
             method: "POST",
-            body: JSON.stringify({ project: this.state }),
+            body: JSON.stringify({ supplies: this.state }),
             headers: new Headers({
                 "Content-Type": "application/json",
                 "Authorization": this.props.token
@@ -32,10 +32,10 @@ export default class ProjectCreate extends Component {
             .then((data) => {
                 this.props.updateTable();
                 this.setState({
-                    aid: "",
-                    index: "",
-                    title: "",
-                    budget: ""
+                    pid: "",
+                    brand: "",
+                    item: "",
+                    amount: ""
                 })
             })
         event.preventDefault()
@@ -46,19 +46,19 @@ export default class ProjectCreate extends Component {
         return (
             <div>
                 <Modal isOpen={true}>
-                    <ModalHeader toggle={this.props.toggle} charCode="X">Add New Project</ModalHeader>
+                    <ModalHeader toggle={this.props.toggle} charCode="X">Add Supplies</ModalHeader>
                     <ModalBody>
                         <Form onSubmit={this.handleSubmit} >
                             <FormGroup>
-                                <Input type="text" name="title" value={this.state.title} placeholder="Project Title" onChange={this.handleChange} />
+                                <Input type="text" name="brand" value={this.state.brand} placeholder="Brand" onChange={this.handleChange} />
                             </FormGroup>
                             <FormGroup>
-                                <Input type="number" name="budget" value={this.state.budget} placeholder="Project Budget" onChange={this.handleChange} />
+                                <Input type="text" name="item" value={this.state.item} placeholder="Item" onChange={this.handleChange} />
                             </FormGroup>
                             <FormGroup>
-                                <Input type="number" name="index" value={this.state.index} placeholder="Project Priority" onChange={this.handleChange} />
+                                <Input type="number" name="amount" value={this.state.amount} placeholder="Amount" onChange={this.handleChange} />
                             </FormGroup>
-                            <Button type="submit" color="primary">Create Project</Button>
+                            <Button type="submit" color="primary">Add Supplies</Button>
                         </Form>
                     </ModalBody>
                 </Modal>
