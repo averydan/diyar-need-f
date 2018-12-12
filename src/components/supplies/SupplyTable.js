@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Container, Table, Button, Row, Col, Collapse, Card, CardBody } from 'reactstrap';
 import CreateSupplies from './CreateSupplies';
 import './SupplyTable.css'
+import { Route, Switch, } from "react-router-dom"
+
 
 class SupplyTable extends Component {
     constructor(props) {

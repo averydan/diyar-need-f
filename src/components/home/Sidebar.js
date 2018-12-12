@@ -3,6 +3,7 @@ import { Route, Switch, } from "react-router-dom"
 import Projects from "../projects/Projects";
 import Supplies from "../supplies/Supplies"
 
+
 const Sidebar = (props) => (
 
     <div className="sidebar">

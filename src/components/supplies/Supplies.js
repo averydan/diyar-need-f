@@ -2,19 +2,24 @@ import React, { Component } from "react";
 import SupplyTable from "./SupplyTable";
 import SupplyEdit from "./SupplyEdit";
 import APIURL from "../../helpers/enviorment";
-export default class Supplies extends Component {
+import { withRouter } from "react-router"
+
+class Supplies extends Component {
     constructor(props) {
         super(props);
+        console.log("Hello", this.props.location)
         this.state = {
             supplies: [],
             updatePressed: false,
-            supplyToUpdate: {}
+            supplyToUpdate: {},
+            project: this.props.location.query
         }
     }
     componentDidMount = () => {
         this.fetchSupplies();
     }
     fetchSupplies = () => {
+        console.log(this.state.project)
         fetch(`${APIURL}/supplies/get/4`, {
             method: "GET",
             headers: new Headers({
@@ -79,3 +84,4 @@ export default class Supplies extends Component {
 
 }
 
+export default withRouter(Supplies)
