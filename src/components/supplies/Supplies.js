@@ -55,7 +55,7 @@ class Supplies extends Component {
         console.log(supply);
         fetch(`${APIURL}/supplies/update/${supply.id}`, {
             method: 'PUT',
-            body: JSON.stringify({ supply: supply }),
+            body: JSON.stringify({ supplies: supply }),
             headers: new Headers({
                 'Content-Type': 'application/json',
                 'Authorization': this.props.token

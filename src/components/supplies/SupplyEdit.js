@@ -1,25 +1,24 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Input, Modal, ModalHeader, ModalBody } from 'reactstrap';
 
-class ProjectEdit extends Component {
+class SupplyEdit extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            aid: "",
-            index: "",
-            title: "",
-            budget: ""
+            id: "",
+            brand: "",
+            item: "",
+            amount: ""
         };
     }
 
     componentWillMount() {
-        console.log(this.props.project.aid);
+        console.log(this.props.supply);
         this.setState({
-            id: this.props.project.id,
-            aid: this.props.project.aid,
-            index: this.props.project.index,
-            title: this.props.project.title,
-            budget: this.props.project.budget
+            id: this.props.supply.id,
+            brand: this.props.supply.brand,
+            item: this.props.supply.item,
+            amount: this.props.supply.amount
         })
     }
 
@@ -39,19 +38,19 @@ class ProjectEdit extends Component {
         return (
             <div>
                 <Modal isOpen={true} >
-                    <ModalHeader toggle={this.props.toggle} charCode="X">Edit Project</ModalHeader>
+                    <ModalHeader toggle={this.props.toggle} charCode="X">Edit Supply</ModalHeader>
                     <ModalBody>
                         <Form onSubmit={this.handleSubmit} >
                             <FormGroup>
-                                <Input type="text" name="title" value={this.state.title} placeholder="project Title" onChange={this.handleChange} />
+                                <Input type="text" name="brand" value={this.state.brand} placeholder="Brand" onChange={this.handleChange} />
                             </FormGroup>
                             <FormGroup>
-                                <Input type="number" name="budget" value={this.state.budget}  placeholder="Project Budget" onChange={this.handleChange} />
+                                <Input type="text" name="item" value={this.state.item}  placeholder="Item" onChange={this.handleChange} />
                             </FormGroup>
                             <FormGroup>
-                                <Input type="number" name="index" value={this.state.index}  placeholder="Project Priority" onChange={this.handleChange} />
+                                <Input type="number" name="amount" value={this.state.amount}  placeholder="Amount" onChange={this.handleChange} />
                             </FormGroup>
-                            <Button type="submit" color="primary">Update Project</Button>
+                            <Button type="submit" color="primary">Update Supply</Button>
                         </Form>
                     </ModalBody>
                 </Modal>
@@ -61,4 +60,4 @@ class ProjectEdit extends Component {
 }
 
 
-export default ProjectEdit;
+export default SupplyEdit;
