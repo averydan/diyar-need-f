@@ -44,7 +44,7 @@ class ProjectTable extends Component {
                                         return (
                                             <tr key={id}>
                                                 <th scope="row">{project.index}</th>
-                                                <td><Link to={{ pathname: "/supplies", query: { title: project.title, id: project.id } }} onClick={sessionStorage.setItem('title', project.title)}>{project.title}</Link></td>
+                                                <td><Link to={{ pathname: "/supplies", query: { title: project.title, id: project.id } }}>{project.title}</Link></td>
                                                 <td>{project.budget}</td>                                   
                                                 <td>
                                                     <Button id={project.id} className="delete-button" onClick={this.props.delete} outline color="secondary">Delete</Button>

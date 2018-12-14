@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { Container, Table, Button, Row, Col, Collapse, Card, CardBody } from 'reactstrap';
 import CreateSupplies from './CreateSupplies';
 import './SupplyTable.css'
-import { Route, Switch, } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 
 class SupplyTable extends Component {
     constructor(props) {
         super(props);
+        console.log(props)
         this.state = {
             modalOpen: false
         }
@@ -24,15 +25,15 @@ class SupplyTable extends Component {
             <Container className="display">
                 <Row>
                     <Col md="12">
-                        <div id="header"><h2>{sessionStorage.getItem('title')}</h2></div>
-                        {this.state.modalOpen ? <CreateSupplies updateTable={this.props.updateTable} toggle={this.toggle} token={this.props.token} /> : <div></div>}
+                        <div id="header"><h2>{this.props.project.title}</h2></div>
+                        {this.state.modalOpen ? <CreateSupplies pid={this.props.project.id} updateTable={this.props.updateTable} toggle={this.toggle} token={this.props.token} /> : <div></div>}
                         <Table striped>
                             <thead>
                                 <tr>
                                     <th>Brand</th>
                                     <th>Item</th>
                                     <th>Amount Needed</th>
-                                    <th><Button id="create-supply" onClick={this.toggle}>Add Supplies</Button></th>
+                                    <th><Button id="create-supply" onClick={this.toggle}>Add Supplies</Button><Link to="/"><Button>Back to Projects</Button></Link></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -40,7 +41,7 @@ class SupplyTable extends Component {
                                     this.props.supplies.map((supply, id) => {
                                         return (
                                             <tr key={id}>
-                                                <th scope="row">{supply.brand}</th>
+                                                <td scope="row">{supply.brand}</td>
                                                 <td>{supply.item}</td>
                                                 <td>{supply.amount}</td>                                                <td>
                                                     <Button id={supply.id} className="delete-button" onClick={this.props.delete} outline color="secondary">Delete</Button>

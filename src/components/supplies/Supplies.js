@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import SupplyTable from "./SupplyTable";
 import SupplyEdit from "./SupplyEdit";
 import APIURL from "../../helpers/enviorment";
-import { withRouter } from "react-router"
+import { withRouter, Redirect } from "react-router"
 
 class Supplies extends Component {
     constructor(props) {
@@ -12,15 +12,21 @@ class Supplies extends Component {
             supplies: [],
             updatePressed: false,
             supplyToUpdate: {},
-            project: this.props.location.query
+            project: this.props.location.query,
         }
     }
     componentDidMount = () => {
-        this.fetchSupplies();
+        if (this.state.project === undefined) {
+            console.log("Is this if?", this.state.project)
+          }
+          else {
+            this.fetchSupplies();
+            console.log("Is this else?", this.state.project)
+          }
     }
     fetchSupplies = () => {
-        console.log(this.state.project)
-        fetch(`${APIURL}/supplies/get/4`, {
+        console.log("Did This Work?", this.state.project)
+        fetch(`${APIURL}/supplies/get/${this.state.project.id}`, {
             method: "GET",
             headers: new Headers({
                 "Content-Type": "application/json",
@@ -73,15 +79,19 @@ class Supplies extends Component {
     }
 
     render() {
-        return (
+        if (this.state.project === undefined) {
+            return <Redirect to='/' />
+          }
+          if (this.state.project !== undefined) {
+              return (
             <div>
-                <SupplyTable supplies={this.state.supplies} updateTable={this.fetchSupplies} token={this.props.token} delete={this.supplyDelete} update={this.setUpdatedSupplies} />
+                {this.state.badRoute ? <Redirect push to="/"/> : <div></div>}<SupplyTable project={this.state.project} supplies={this.state.supplies} updateTable={this.fetchSupplies} token={this.props.token} delete={this.supplyDelete} update={this.setUpdatedSupplies} />
                 {this.state.updatePressed ? <SupplyEdit toggle={this.toggle} update={this.suppliesUpdate} token={this.props.token}
                 supply={this.state.supplyToUpdate} /> : <div></div>}
             </div>
-        )
+              )
+          }
     }
-
 }
 
 export default withRouter(Supplies)

@@ -6,7 +6,7 @@ export default class SuppliesCreate extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            pid: 18,
+            pid: props.pid,
             brand: "",
             item: "",
             amount: ""
